@@ -81,10 +81,11 @@ metadata:
   name: bankapp-session
   namespace: bankapp
 spec:
-  targetRefs:
-    - group: gateway.networking.k8s.io
-      kind: HTTPRoute
-      name: bankapp-route
+  targetRef:
+    group: gateway.networking.k8s.io
+    kind: HTTPRoute
+    name: bankapp-route
+
   loadBalancer:
     type: ConsistentHash
     consistentHash:
