@@ -3,12 +3,13 @@ kind: Deployment
 metadata:
   name: mysql
   namespace: bankapp
+  annotations:
+    argocd.argoproj.io/sync-wave: "0"
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: mysql
-  strategy:
-    type: Recreate
   template:
     metadata:
       labels:

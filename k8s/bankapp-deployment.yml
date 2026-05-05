@@ -3,7 +3,10 @@ kind: Deployment
 metadata:
   name: bankapp
   namespace: bankapp
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: bankapp
@@ -56,6 +59,7 @@ spec:
               path: /actuator/health
               port: 8080
             initialDelaySeconds: 30
+            periodSeconds: 10
             failureThreshold: 15
           livenessProbe:
             httpGet:
