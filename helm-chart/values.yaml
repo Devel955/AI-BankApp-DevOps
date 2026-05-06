@@ -1,0 +1,19 @@
+bankapp:
+  image:
+    repository: trainwithshubham/ai-bankapp-eks
+    tag: latest
+    pullPolicy: Always
+
+  replicaCount: 2
+
+  resources:
+    requests:
+      memory: "256Mi"
+      cpu: "250m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+  env:
+    - name: JAVA_OPTS
+      value: "-Xms128m -Xmx256m"

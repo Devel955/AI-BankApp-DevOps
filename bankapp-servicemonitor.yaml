@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: bankapp-monitor
+  namespace: monitoring
+  labels:
+    release: monitoring
+    app.kubernetes.io/instance: monitoring
+spec:
+  namespaceSelector:
+    matchNames:
+      - bankapp
+  selector:
+    matchLabels:
+      app: bankapp
+  endpoints:
+    - targetPort: 8080
+      path: /actuator/prometheus
+      interval: 15s

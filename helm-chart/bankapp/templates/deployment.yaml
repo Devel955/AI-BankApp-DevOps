@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "bankapp.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.bankapp.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "bankapp.fullname" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "bankapp.fullname" . }}
+    spec:
+      containers:
+        - name: bankapp
+          image: "{{ .Values.bankapp.image.repository }}:{{ .Values.bankapp.image.tag }}"
+          imagePullPolicy: {{ .Values.bankapp.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+

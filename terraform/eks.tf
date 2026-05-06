@@ -47,18 +47,17 @@ module "eks" {
 
   # Managed Node Group
   eks_managed_node_groups = {
-    bankapp-ng = {
-      instance_types = [var.node_instance_type]
-      desired_size   = var.node_desired_count
-      min_size       = var.node_desired_count
-      max_size       = var.node_max_count
+  bankapp-ng = {
+    instance_types = [var.node_instance_type]
+    capacity_type  = "ON_DEMAND"
 
-      tags = {
-        NodeGroup = "bankapp"
-      }
-    }
+    desired_size = var.node_desired_count
+    min_size     = 1
+    max_size     = var.node_max_count
+
+    ami_type = "AL2_x86_64"
   }
-
+}
   tags = local.tags
 }
 
